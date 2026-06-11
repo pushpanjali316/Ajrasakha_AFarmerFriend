@@ -1,0 +1,95 @@
+.farmer-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  padding: 24px 16px;
+}
+
+.farmer-card {
+  width: 100%;
+  max-width: 520px;
+  background: rgba(255, 255, 255, 0.16);
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
+  padding: 34px;
+  border-radius: 28px;
+  box-shadow: 0 20px 45px rgba(0, 0, 0, 0.16);
+  border: 1px solid rgba(255, 255, 255, 0.24);
+  color: white;
+}
+
+.farmer-card h2 {
+  margin: 0 0 10px;
+  color: white;
+  font-size: 2rem;
+  font-weight: 800;
+}
+
+.farmer-card p {
+  margin: 0 0 24px;
+  color: rgba(255, 255, 255, 0.86);
+  line-height: 1.6;
+}
+
+.input-group {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  margin-bottom: 22px;
+}
+
+.farmer-input,
+.farmer-select {
+  width: 100%;
+  padding: 15px 16px;
+  font-size: 15px;
+  border: 1px solid rgba(255, 255, 255, 0.22);
+  border-radius: 16px;
+  outline: none;
+  transition: all 0.25s ease;
+  box-sizing: border-box;
+  background: rgba(255, 255, 255, 0.18);
+  color: white;
+}
+
+.farmer-input::placeholder {
+  color: rgba(255, 255, 255, 0.72);
+}
+
+.farmer-select option {
+  color: black;
+}
+
+.farmer-input:focus,
+.farmer-select:focus {
+  border-color: rgba(255, 255, 255, 0.45);
+  box-shadow: 0 0 0 4px rgba(255, 255, 255, 0.10);
+  background: rgba(255, 255, 255, 0.22);
+}
+
+.farmer-button {
+  width: 100%;
+  padding: 15px;
+  font-size: 1rem;
+  font-weight: 800;
+  color: white;
+  background: linear-gradient(135deg, #245c36, #2f7a45);
+  border-radius: 16px;
+  transition: 0.25s ease;
+}
+
+.farmer-button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 22px rgba(36, 92, 54, 0.3);
+}
+
+.error-text {
+  color: #fff;
+  background-color: rgba(192, 57, 43, 0.28);
+  padding: 12px;
+  border-radius: 12px;
+  font-size: 14px;
+  margin-bottom: 15px;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+}

@@ -46,15 +46,15 @@ India loses billions in crop yield every year due to delayed detection of crop s
 
 ```
 ┌─────────────────────────────────────────────────────────┐
-│                     CLIENT (React + TS)                  │
+│                     CLIENT (React + TS)                 │
 │  Login → Dashboard → Map → Heatmap → Insights → Alerts  │
-│         Farmers → Operations → Moderator Panel           │
+│         Farmers → Operations → Moderator Panel          │
 └──────────────────────┬──────────────────────────────────┘
                        │ REST API
 ┌──────────────────────▼──────────────────────────────────┐
-│                   SERVER (Node + Express)                 │
-│   Auth Routes │ Field Routes │ Satellite Routes          │
-│   Alert Routes │ Analysis Routes                         │
+│                   SERVER (Node + Express)               │
+│   Auth Routes │ Field Routes │ Satellite Routes         │
+│   Alert Routes │ Analysis Routes                        │
 └──┬─────────────────────┬──────────────────┬─────────────┘
    │                     │                  │
    ▼                     ▼                  ▼
@@ -101,7 +101,7 @@ Ajrasakha/
 │       │   └── SwipeableCards.tsx  # Mobile-friendly card swiper
 │       ├── pages/
 │       │   ├── Dashboard.tsx       # Main farmer overview
-│       │   ├── MapPage.tsx         # Region-wise map           visualization
+│       │   ├── MapPage.tsx         # Region-wise map visualization
 │       │   ├── Heatmap.tsx         # Satellite index heatmap
 │       │   ├── Insights.tsx        # AI advisory display
 │       │   ├── Alerts.tsx          # Alert management
@@ -139,8 +139,8 @@ Ajrasakha/
 
 ```bash
 # Clone the repository
-git clone https://github.com/pushpanjali316/Ajrasakha.git
-cd Ajrasakha
+git clone https://github.com/pushpanjali316/Ajrasakha_AFarmerFriend.git
+cd Ajrasakha_AFarmerFriend
 
 # Install server dependencies
 cd server
@@ -186,10 +186,12 @@ node seed.js
 ```bash
 # Terminal 1 - Start backend
 cd server
+npm install
 node index.js
 
 # Terminal 2 - Start frontend
 cd client
+npm install
 npm run dev
 ```
 
@@ -211,4 +213,3 @@ Visit `http://localhost:5173`
 ## 👩‍💻 Author
 
 **Pushpanjali Vandavasi**
----

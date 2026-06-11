@@ -1,0 +1,146 @@
+:root {
+  font-family: "Inter", "Segoe UI", Arial, sans-serif;
+  line-height: 1.5;
+  font-weight: 400;
+
+  --primary: #245c36;
+  --primary-light: #2f7a45;
+  --accent: #d5a021;
+
+  --text: #ffffff;
+  --muted: rgba(255, 255, 255, 0.75);
+
+  --glass: rgba(255, 255, 255, 0.14);
+  --glass-strong: rgba(255, 255, 255, 0.18);
+  --border: rgba(255, 255, 255, 0.22);
+
+  --shadow: 0 20px 45px rgba(0, 0, 0, 0.18);
+
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html,
+body,
+#root {
+  width: 100%;
+  min-height: 100%;
+}
+
+/* 🌾 MAIN BACKGROUND IMAGE */
+body {
+  min-width: 320px;
+  color: var(--text);
+
+  background:
+    linear-gradient(rgba(17, 24, 39, 0.45), rgba(17, 24, 39, 0.45)),
+    url("/farm-bg.jpg") no-repeat center center fixed;
+
+  background-size: cover;
+}
+
+/* 🔥 REMOVE ALL WHITE WRAPPERS */
+.container,
+.page-wrapper,
+.app-container,
+.main-container,
+body > div {
+  background: transparent !important;
+  max-width: 100% !important;
+  padding: 0 !important;
+  margin: 0 !important;
+}
+
+/* LINKS */
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+/* INPUT + BUTTON RESET */
+button,
+input,
+select,
+textarea {
+  font: inherit;
+}
+
+button {
+  border: none;
+  outline: none;
+  cursor: pointer;
+  background: none;
+}
+
+/* IMAGE */
+img {
+  max-width: 100%;
+  display: block;
+}
+
+/* LIST */
+ul,
+ol {
+  list-style: none;
+}
+
+/* SCROLLBAR (optional premium feel) */
+body::-webkit-scrollbar {
+  width: 10px;
+}
+
+body::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.35);
+  border-radius: 20px;
+}
+
+/* TEXT HELPERS */
+h1, h2, h3, h4, h5, h6 {
+  color: white;
+}
+
+p {
+  color: rgba(255, 255, 255, 0.9);
+}
+
+/* GLASS UTILITY CLASS (use anywhere) */
+.glass {
+  background: var(--glass);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid var(--border);
+  box-shadow: var(--shadow);
+  border-radius: 20px;
+}
+
+/* STRONG GLASS */
+.glass-strong {
+  background: var(--glass-strong);
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
+  border: 1px solid var(--border);
+  box-shadow: var(--shadow);
+  border-radius: 24px;
+}
+
+/* BUTTON STYLE (optional global) */
+.primary-btn {
+  padding: 12px 20px;
+  border-radius: 14px;
+  font-weight: 700;
+  background: linear-gradient(135deg, #245c36, #2f7a45);
+  color: white;
+  transition: all 0.25s ease;
+}
+
+.primary-btn:hover {
+  transform: translateY(-2px);
+}

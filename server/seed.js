@@ -117,7 +117,7 @@ const seedRegions = [
   {
     name: "Godavari Basin (Andhra Pradesh)",
     coordinates: { lat: 15.9129, lng: 79.7400 },
-    cropType: "Rice",
+    cropType: "Corn",
     status: "Moderate",
     latestNDVI: 0.45,
     trend: "declining"
@@ -133,7 +133,7 @@ const seedRegions = [
   {
     name: "Palakkad Gap (Kerala)",
     coordinates: { lat: 10.8505, lng: 76.2711 },
-    cropType: "Rice",
+    cropType: "Soybean",
     status: "Healthy",
     latestNDVI: 0.68,
     trend: "stable"

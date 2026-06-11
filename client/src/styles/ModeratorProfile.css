@@ -1,0 +1,213 @@
+.moderator-container {
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  padding: 32px 16px;
+  color: white;
+}
+
+.moderator-login,
+.moderator-dashboard {
+  width: 100%;
+  max-width: 920px;
+  background: rgba(255, 255, 255, 0.14);
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
+  border-radius: 28px;
+  border: 1px solid rgba(255, 255, 255, 0.22);
+  box-shadow: 0 20px 45px rgba(0, 0, 0, 0.16);
+  padding: 28px;
+}
+
+.moderator-login {
+  max-width: 460px;
+}
+
+.moderator-login h2,
+.moderator-dashboard h2,
+.moderator-container h2 {
+  text-align: center;
+  color: white;
+  margin-bottom: 22px;
+  font-size: 2rem;
+  font-weight: 800;
+}
+
+.moderator-container h3 {
+  color: rgba(255, 255, 255, 0.94);
+  margin-bottom: 12px;
+  font-size: 1.08rem;
+  font-weight: 700;
+}
+
+.moderator-container input,
+.moderator-container select,
+.moderator-container textarea {
+  width: 100%;
+  padding: 13px 14px;
+  margin: 8px 0;
+  border-radius: 16px;
+  border: 1px solid rgba(255, 255, 255, 0.22);
+  font-size: 14px;
+  background: rgba(255, 255, 255, 0.14);
+  color: white;
+  outline: none;
+  transition: all 0.25s ease;
+}
+
+.moderator-container input::placeholder,
+.moderator-container textarea::placeholder {
+  color: rgba(255, 255, 255, 0.72);
+}
+
+.moderator-container select option {
+  color: black;
+  background: white;
+}
+
+.moderator-container input:focus,
+.moderator-container select:focus,
+.moderator-container textarea:focus {
+  background: rgba(255, 255, 255, 0.2);
+  border-color: rgba(255, 255, 255, 0.38);
+  box-shadow: 0 0 0 4px rgba(255, 255, 255, 0.08);
+}
+
+.moderator-container button {
+  width: 100%;
+  padding: 13px 18px;
+  border: none;
+  border-radius: 16px;
+  cursor: pointer;
+  background: linear-gradient(135deg, #43a047, #2e7d32);
+  color: #fff;
+  font-weight: 800;
+  transition: all 0.25s ease;
+  margin-top: 10px;
+  box-shadow: 0 10px 20px rgba(46, 125, 50, 0.22);
+}
+
+.moderator-container button:hover {
+  transform: translateY(-2px);
+}
+
+.google-button {
+  background: linear-gradient(135deg, #ef4444, #c81e1e) !important;
+  box-shadow: 0 10px 20px rgba(200, 30, 30, 0.22) !important;
+}
+
+.error-text {
+  color: #fff;
+  background: rgba(239, 68, 68, 0.22);
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  padding: 12px 14px;
+  border-radius: 14px;
+  margin-bottom: 12px;
+  font-size: 0.92rem;
+}
+
+.toggle-text {
+  margin-top: 16px;
+  text-align: center;
+  color: rgba(255, 255, 255, 0.82);
+  font-size: 0.95rem;
+}
+
+.toggle-text span {
+  color: #fde68a;
+  font-weight: 700;
+  cursor: pointer;
+  margin-left: 6px;
+}
+
+.moderator-profile,
+.farmers-section,
+.alerts-section {
+  margin-top: 20px;
+  padding: 18px;
+  border-radius: 22px;
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  border: 1px solid rgba(255, 255, 255, 0.16);
+  box-shadow: 0 12px 26px rgba(0, 0, 0, 0.12);
+}
+
+.moderator-profile p,
+.farmer-card p,
+.alert-card p,
+.farmers-section p,
+.alerts-section p {
+  color: rgba(255, 255, 255, 0.92);
+  margin: 8px 0;
+  line-height: 1.6;
+}
+
+.farmer-card,
+.alert-card {
+  padding: 14px 16px;
+  margin-top: 12px;
+  border-radius: 16px;
+  background: rgba(255, 255, 255, 0.12);
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+}
+
+.alert-card {
+  border-left: 4px solid #f59e0b;
+}
+
+.farmer-card {
+  border-left: 4px solid #4ade80;
+}
+
+.moderator-button {
+  margin-top: 22px;
+}
+
+@media screen and (max-width: 768px) {
+  .moderator-container {
+    padding: 18px 12px;
+  }
+
+  .moderator-login,
+  .moderator-dashboard {
+    padding: 20px 16px;
+    border-radius: 22px;
+  }
+
+  .moderator-login h2,
+  .moderator-dashboard h2,
+  .moderator-container h2 {
+    font-size: 1.6rem;
+  }
+
+  .moderator-container button {
+    width: 100%;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .moderator-container {
+    padding: 12px 8px;
+  }
+
+  .moderator-login,
+  .moderator-dashboard {
+    padding: 16px 12px;
+    border-radius: 18px;
+  }
+
+  .moderator-container input,
+  .moderator-container select,
+  .moderator-container textarea {
+    font-size: 13px;
+    padding: 11px 12px;
+  }
+
+  .moderator-container button {
+    font-size: 13px;
+    padding: 11px 0;
+  }
+}

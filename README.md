@@ -139,8 +139,8 @@ Ajrasakha/
 
 ```bash
 # Clone the repository
-git clone https://github.com/pushpanjali316/Ajrasakha.git
-cd Ajrasakha
+git clone https://github.com/pushpanjali316/Ajrasakha_AFarmerFriend.git
+cd Ajrasakha_AFarmerFriend
 
 # Install server dependencies
 cd server

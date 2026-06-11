@@ -63,6 +63,7 @@ src/services/api.ts
 npm run build
 ```
 
-## Author
+##  Author
 
-Pushpanjali Vandavasi
+**Pushpanjali Vandavasi**
+---

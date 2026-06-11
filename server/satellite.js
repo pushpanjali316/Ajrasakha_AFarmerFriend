@@ -71,18 +71,6 @@ module.exports = { fetchSatelliteData };
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
 // // Simulates fetching fresh data from a satellite
 // const fetchSatelliteData = (cropType) => {
 //   // Generate random healthy-ish numbers (0.4 to 0.9)

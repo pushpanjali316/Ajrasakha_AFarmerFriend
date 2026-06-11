@@ -183,40 +183,107 @@ app.post('/api/insights', verifyAdmin, async (req, res) => {
     res.status(500).json({ error: err.message });
   }
 });
+// Helper: retry with exponential backoff + model fallback
+async function generateWithRetry(prompt, retries = 3, delay = 2000) {
+  const models = ["gemini-2.5-flash", "gemini-1.5-flash"];
+
+  for (const modelName of models) {
+    let currentDelay = delay;
+    for (let attempt = 1; attempt <= retries; attempt++) {
+      try {
+        const model = genAI.getGenerativeModel({ model: modelName });
+        const result = await model.generateContent(prompt);
+        console.log(`✅ AI responded via ${modelName} (attempt ${attempt})`);
+        return result.response.text();
+      } catch (err) {
+        if (err.status === 503) {
+          if (attempt < retries) {
+            console.log(`⏳ ${modelName} overloaded, retrying in ${currentDelay / 1000}s...`);
+            await new Promise(res => setTimeout(res, currentDelay));
+            currentDelay *= 2; // 2s → 4s → 8s
+          } else {
+            console.log(`⚠️ ${modelName} exhausted retries, trying fallback...`);
+          }
+        } else {
+          throw err; // 401/400/etc → fail immediately, no point retrying
+        }
+      }
+    }
+  }
+  return null; // both models failed
+}
+
+function getFallbackAdvice(cause = "") {
+  const c = cause.toLowerCase();
+  if (c.includes("drought") || c.includes("moisture"))
+    return "1. Activate drip irrigation immediately.\n2. Apply mulch to retain soil moisture.\n3. Monitor soil humidity every 48 hours.";
+  if (c.includes("pest") || c.includes("blight"))
+    return "1. Apply approved pesticide spray within 24 hours.\n2. Isolate affected rows to prevent spread.\n3. Report to local agricultural officer for assistance.";
+  return "1. Conduct immediate field inspection to assess damage extent.\n2. Consult local Krishi Vigyan Kendra for soil/crop testing.\n3. File crop stress report with district agriculture office.";
+}
 
 // --- THE REAL "DEEP ANALYSIS" AI ROUTE ---
 app.post('/api/analyze', async (req, res) => {
   const { title, cause, prediction } = req.body;
-  
-  try {
-    // 1. Select the Gemini 1.5 Flash model (it is incredibly fast)
-    const model = genAI.getGenerativeModel({ model: "gemini-2.5-flash" });
 
-    // 2. The "System Prompt" - This is where you tell the AI how to behave
-    const prompt = `
-      You are an expert agricultural scientist and government policy advisor in India. 
-      Analyze the following crop issue reported by a satellite monitoring system:
-      
-      - Alert Title: ${title}
-      - Detected Cause: ${cause}
-      - Risk/Prediction: ${prediction}
-      
-      Provide a highly professional, concise, 3-step actionable intervention plan to mitigate this issue. 
-      Format your response as a simple list. Do not use markdown formatting like **bolding** or # headers. Keep it strictly under 5 sentences.
-    `;
-
-    // 3. Send the prompt to Gemini and wait for the response
-    const result = await model.generateContent(prompt);
-    const aiResponse = result.response.text();
+  const prompt = `
+    You are an expert agricultural scientist and government policy advisor in India. 
+    Analyze the following crop issue reported by a satellite monitoring system:
+    - Alert Title: ${title}
+    - Detected Cause: ${cause}
+    - Risk/Prediction: ${prediction}
     
-    // 4. Send the AI's brilliant plan back to your React frontend
-    res.json({ analysis: aiResponse });
+    Provide a highly professional, concise, 3-step actionable intervention plan to mitigate this issue. 
+    Format your response as a simple list. Do not use markdown formatting like **bolding** or # headers. Keep it strictly under 5 sentences.
+  `;
 
+  try {
+    const aiText = await generateWithRetry(prompt);
+
+    if (aiText) {
+      res.json({ analysis: aiText });
+    } else {
+      console.warn("⚠️ All AI models failed. Using rule-based fallback.");
+      res.json({ analysis: getFallbackAdvice(cause), fallback: true });
+    }
   } catch (err) {
     console.error("AI Generation Error:", err);
     res.status(500).json({ error: "AI Engine Failed to respond." });
   }
 });
+// // --- THE REAL "DEEP ANALYSIS" AI ROUTE ---
+// app.post('/api/analyze', async (req, res) => {
+//   const { title, cause, prediction } = req.body;
+  
+//   try {
+//     // 1. Select the Gemini 1.5 Flash model (it is incredibly fast)
+//     const model = genAI.getGenerativeModel({ model: "gemini-2.5-flash" });
+
+//     // 2. The "System Prompt" - This is where you tell the AI how to behave
+//     const prompt = `
+//       You are an expert agricultural scientist and government policy advisor in India. 
+//       Analyze the following crop issue reported by a satellite monitoring system:
+      
+//       - Alert Title: ${title}
+//       - Detected Cause: ${cause}
+//       - Risk/Prediction: ${prediction}
+      
+//       Provide a highly professional, concise, 3-step actionable intervention plan to mitigate this issue. 
+//       Format your response as a simple list. Do not use markdown formatting like **bolding** or # headers. Keep it strictly under 5 sentences.
+//     `;
+
+//     // 3. Send the prompt to Gemini and wait for the response
+//     const result = await model.generateContent(prompt);
+//     const aiResponse = result.response.text();
+    
+//     // 4. Send the AI's brilliant plan back to your React frontend
+//     res.json({ analysis: aiResponse });
+
+//   } catch (err) {
+//     console.error("AI Generation Error:", err);
+//     res.status(500).json({ error: "AI Engine Failed to respond." });
+//   }
+// });
 
 app.put('/api/alerts/:id/status', async (req, res) => {
   try {

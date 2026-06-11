@@ -1,0 +1,43 @@
+.dashboard-container {
+  min-height: 100vh;
+  padding: 24px;
+  color: white;
+}
+
+.dashboard-header {
+  margin-bottom: 28px;
+  padding: 34px;
+  border-radius: 30px;
+  background: rgba(255, 255, 255, 0.14);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(255, 255, 255, 0.22);
+  box-shadow: 0 20px 45px rgba(0, 0, 0, 0.16);
+}
+
+.dashboard-header h1 {
+  margin: 0 0 10px;
+  font-size: 2.2rem;
+  font-weight: 800;
+  color: white;
+}
+
+.dashboard-header p {
+  margin: 0;
+  color: rgba(255, 255, 255, 0.86);
+  font-size: 1rem;
+  line-height: 1.6;
+}
+
+.loading-state,
+.empty-state {
+  text-align: center;
+  padding: 46px 20px;
+  background: rgba(255, 255, 255, 0.14);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border-radius: 24px;
+  border: 1px solid rgba(255, 255, 255, 0.22);
+  color: white;
+  font-weight: 600;
+}

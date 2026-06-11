@@ -1,0 +1,241 @@
+.admin-dashboard {
+  min-height: 100vh;
+  padding: 28px;
+  font-family: "Inter", "Segoe UI", sans-serif;
+  color: white;
+  background: transparent;
+}
+
+.admin-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 24px;
+  padding: 22px 24px;
+  border-radius: 24px;
+  background: rgba(255, 255, 255, 0.14);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(255, 255, 255, 0.22);
+  box-shadow: 0 20px 45px rgba(0, 0, 0, 0.16);
+}
+
+.admin-header h1,
+.admin-header h2 {
+  margin: 0;
+  color: white;
+  font-weight: 800;
+}
+
+.logout-btn {
+  background: rgba(255, 255, 255, 0.16);
+  color: white;
+  padding: 11px 18px;
+  border-radius: 14px;
+  font-weight: 700;
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  transition: all 0.25s ease;
+}
+
+.logout-btn:hover {
+  transform: translateY(-2px);
+  background: rgba(255, 255, 255, 0.22);
+}
+
+.admin-panel,
+.insight-panel,
+.farmers-panel {
+  background: rgba(255, 255, 255, 0.14);
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
+  padding: 26px;
+  margin-top: 22px;
+  border-radius: 26px;
+  box-shadow: 0 18px 40px rgba(0, 0, 0, 0.16);
+  border: 1px solid rgba(255, 255, 255, 0.22);
+  color: white;
+}
+
+.admin-panel h2,
+.insight-panel h2,
+.farmers-panel h2 {
+  margin-top: 0;
+  margin-bottom: 18px;
+  color: white;
+  font-weight: 800;
+}
+
+.admin-form {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+.form-row {
+  display: flex;
+  gap: 16px;
+}
+
+.form-group {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.form-group label {
+  font-weight: 700;
+  font-size: 0.92rem;
+  color: white;
+}
+
+.admin-dashboard input,
+.admin-dashboard textarea,
+.admin-dashboard select {
+  padding: 14px;
+  border: 1px solid rgba(255, 255, 255, 0.22);
+  border-radius: 16px;
+  width: 100%;
+  box-sizing: border-box;
+  background: rgba(255, 255, 255, 0.14);
+  color: white;
+  outline: none;
+  transition: all 0.25s ease;
+}
+
+.admin-dashboard input::placeholder,
+.admin-dashboard textarea::placeholder {
+  color: rgba(255, 255, 255, 0.72);
+}
+
+.admin-dashboard select option {
+  color: black;
+  background: white;
+}
+
+.admin-dashboard input:focus,
+.admin-dashboard textarea:focus,
+.admin-dashboard select:focus {
+  background: rgba(255, 255, 255, 0.2);
+  border-color: rgba(255, 255, 255, 0.38);
+  box-shadow: 0 0 0 4px rgba(255, 255, 255, 0.08);
+}
+
+.admin-dashboard textarea {
+  min-height: 140px;
+  resize: vertical;
+}
+
+.alert-btn,
+.show-farmers-btn {
+  padding: 13px 18px;
+  border-radius: 16px;
+  font-weight: 800;
+  transition: all 0.25s ease;
+  color: white;
+  border: none;
+}
+.publish-btn{
+    padding: 13px 18px;
+  border-radius: 16px;
+  font-weight: 800;
+  transition: all 0.25s ease;
+  color: rgb(255, 255, 255);
+  border: none;
+}
+
+.alert-btn {
+  background: linear-gradient(135deg, #ef4444, #c81e1e);
+  box-shadow: 0 10px 20px rgba(200, 30, 30, 0.24);
+}
+
+.publish-btn {
+  background: linear-gradient(135deg, #05ec66, #06f044);
+  box-shadow: 0 10px 20px rgba(31, 84, 45, 0.24);
+}
+
+.show-farmers-btn {
+  background: linear-gradient(135deg, #2563eb, #1d4ed8);
+  box-shadow: 0 10px 20px rgba(29, 78, 216, 0.24);
+}
+
+.alert-btn:hover,
+.publish-btn:hover,
+.show-farmers-btn:hover {
+  transform: translateY(-2px);
+}
+
+.farmers-button {
+  margin-top: 24px;
+}
+
+.farmers-table-wrapper {
+  overflow-x: auto;
+  border-radius: 18px;
+  margin-top: 14px;
+}
+
+.farmers-table {
+  width: 100%;
+  border-collapse: collapse;
+  overflow: hidden;
+  border-radius: 18px;
+}
+
+.farmers-table th,
+.farmers-table td {
+  padding: 15px 16px;
+  text-align: left;
+}
+
+.farmers-table th {
+  background: rgba(36, 92, 54, 0.72);
+  color: white;
+  font-weight: 700;
+}
+
+.farmers-table td {
+  background: rgba(255, 255, 255, 0.1);
+  color: white;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.12);
+}
+
+.farmers-table tr:hover td {
+  background: rgba(255, 255, 255, 0.16);
+}
+
+/* extra white section removal */
+.insight-panel textarea,
+.insight-panel input,
+.insight-panel select,
+.admin-panel textarea,
+.admin-panel input,
+.admin-panel select {
+  background: rgba(255, 255, 255, 0.14) !important;
+  color: white !important;
+}
+
+/* mobile */
+@media (max-width: 768px) {
+  .admin-dashboard {
+    padding: 16px;
+  }
+
+  .form-row {
+    flex-direction: column;
+  }
+
+  .admin-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 12px;
+    padding: 18px;
+  }
+
+  .admin-panel,
+  .insight-panel,
+  .farmers-panel {
+    padding: 18px;
+    border-radius: 22px;
+  }
+}

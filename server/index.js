@@ -2,7 +2,7 @@ const path = require('path');
 // __dirname is the absolute path to the folder containing this index.js file
 require('dotenv').config({ path: path.join(__dirname, '../.env') }); 
 
-console.log("MY API KEY IS:", process.env.GEMINI_API_KEY);
+//console.log("MY API KEY IS:", process.env.GEMINI_API_KEY);
 const express = require('express');
 const jwt = require('jsonwebtoken');
 const mongoose = require('mongoose');

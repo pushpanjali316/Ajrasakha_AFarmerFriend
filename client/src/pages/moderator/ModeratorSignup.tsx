@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import "../../styles/ModeratorProfile.css";
+import { API_BASE } from "../../services/api";
 
 const ModeratorSignup: React.FC = () => {
   const navigate = useNavigate();
@@ -18,7 +19,7 @@ const ModeratorSignup: React.FC = () => {
     }
 
     try {
-      const res = await fetch("http://localhost:5000/api/moderator/signup", {
+      const res = await fetch(`${API_BASE}/api/moderator/signup`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ name, email, region, password }),
@@ -40,7 +41,7 @@ const ModeratorSignup: React.FC = () => {
 
   const handleGoogleSignup = () => {
     // redirect to backend OAuth route
-    window.location.href = "http://localhost:5000/api/auth/google";
+    window.location.href = `${API_BASE}/api/auth/google`;
   };
 
   return (

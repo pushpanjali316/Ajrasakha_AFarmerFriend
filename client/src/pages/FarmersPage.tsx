@@ -1,5 +1,6 @@
 import React,{useEffect,useState} from "react";
 import "../styles/farmersPage.css";
+import { API_BASE } from "../services/api";
 
 interface Farmer{
   name:string;
@@ -19,7 +20,7 @@ const FarmersPage:React.FC=()=>{
   const fetchFarmers=async()=>{
     try{
 
-      const res=await fetch("http://localhost:5000/api/farmers");
+      const res=await fetch(`${API_BASE}/api/farmers`);
 
       const data=await res.json();
 

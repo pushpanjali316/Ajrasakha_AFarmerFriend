@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import '../styles/Insights.css';
+import { API_BASE } from "../services/api";
 
 interface Insight {
   _id: string;
@@ -19,7 +20,7 @@ const InsightsPage: React.FC = () => {
   const [aiResponses, setAiResponses] = useState<Record<string, string>>({});
 
   useEffect(() => {
-    fetch('http://localhost:5000/api/insights')
+    fetch(`${API_BASE}/api/insights`)
       .then(res => res.json())
       .then(data => {
         setInsights(data);
@@ -31,7 +32,7 @@ const InsightsPage: React.FC = () => {
   const handleDeepAnalysis = async (insight: Insight) => {
     setAnalyzingId(insight._id);
     try {
-      const res = await fetch('http://localhost:5000/api/analyze', {
+      const res = await fetch(`${API_BASE}/api/analyze`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({

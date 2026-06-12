@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import "../../styles/ModeratorProfile.css";
+import { API_BASE } from "../../services/api";
 
 interface Farmer {
   name: string;
@@ -42,7 +43,7 @@ const ModeratorDashboard: React.FC = () => {
       if (!moderatorRegion) return;
       try {
         const res = await fetch(
-          `http://localhost:5000/api/farmers?region=${encodeURIComponent(
+          `${API_BASE}/api/farmers?region=${encodeURIComponent(
             moderatorRegion
           )}`
         );
@@ -61,7 +62,7 @@ const ModeratorDashboard: React.FC = () => {
       if (!moderatorRegion) return;
       try {
         const res = await fetch(
-          `http://localhost:5000/api/alerts?region=${encodeURIComponent(
+          `${API_BASE}/api/alerts?region=${encodeURIComponent(
             moderatorRegion
           )}`
         );

@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import '../styles/Alerts.css';
+import { API_BASE } from "../services/api";
 
 interface Alert {
   _id: string;
@@ -20,7 +21,7 @@ const AlertsPage: React.FC = () => {
 
   // FETCH ALERTS FROM API
   useEffect(() => {
-    fetch('http://localhost:5000/api/alerts')
+    fetch(`${API_BASE}/api/alerts`)
       .then(res => res.json())
       .then(data => {
         setAlerts(data);
@@ -37,7 +38,7 @@ const AlertsPage: React.FC = () => {
 
     try {
       
-      const res = await fetch(`http://localhost:5000/api/alerts/${id}/status`, {
+      const res = await fetch(`${API_BASE}/api/alerts/${id}/status`, {
         method: 'PUT',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ status: newStatus })

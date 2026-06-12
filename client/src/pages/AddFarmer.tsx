@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useEffect } from "react";
 import "../styles/addFarmer.css";
+import { API_BASE } from "../services/api"; // adjust path as needed
 
 const AddFarmer: React.FC = () => {
   const [name,setName]=useState("");
@@ -37,7 +38,7 @@ const AddFarmer: React.FC = () => {
 
   try {
 
-    const res = await fetch("http://localhost:5000/api/add-farmer",{
+    const res = await fetch(`${API_BASE}/api/add-farmer`,{
       method:"POST",
       headers:{"Content-Type":"application/json"},
       body:JSON.stringify({name,email,location})

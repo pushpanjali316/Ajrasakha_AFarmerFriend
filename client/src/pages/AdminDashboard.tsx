@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import "../styles/adminDashboard.css";
+import { API_BASE } from "../services/api";
 
 interface Farmer {
   name: string;
@@ -47,7 +48,7 @@ export default function AdminDashboard() {
     };
 
     try {
-      const res = await fetch("http://localhost:5000/api/insights", {
+      const res = await fetch(`${API_BASE}/api/insights`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -76,7 +77,7 @@ export default function AdminDashboard() {
     const token = localStorage.getItem("adminToken");
 
     try {
-      const res = await fetch("http://localhost:5000/api/alerts", {
+      const res = await fetch(`${API_BASE}/api/alerts`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -112,7 +113,7 @@ export default function AdminDashboard() {
     }
 
     try {
-      const res = await fetch("http://localhost:5000/api/farmers");
+      const res = await fetch(`${API_BASE}/api/farmers`);
       const data = await res.json();
       setFarmers(data);
       setShowFarmers(true);

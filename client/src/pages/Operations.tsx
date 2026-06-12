@@ -1,5 +1,6 @@
 // client/src/pages/Operations.tsx
 import React, { useState } from "react";
+import { API_BASE } from "../services/api";
 
 const Operations: React.FC = () => {
   const [status, setStatus] = useState<"IDLE" | "RUNNING" | "SUCCESS" | "ERROR">("IDLE");
@@ -20,9 +21,9 @@ const Operations: React.FC = () => {
     setResult(null);
 
     try {
-      const res = await fetch("http://localhost:5000/api/run-pipeline", {
+      const res = await fetch(`${API_BASE}/api/run-pipeline`, {
         method: "POST",
-      });
+      });   
 
       const data = await res.json();
 

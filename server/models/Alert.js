@@ -7,7 +7,9 @@ const AlertSchema = new mongoose.Schema({
   message: String,
   action: String,
   date: String,      // "2 hours ago" (Keeping it string for MVP simplicity)
-  status: { type: String, default: 'active' } // "active" or "completed"
+  status: { type: String, default: 'active' },  // "active" or "completed"
+  location: String,  // "Dharwad Farms, Karnataka"
+  aiInsight: String,
 });
 
 module.exports = mongoose.model('Alert', AlertSchema);

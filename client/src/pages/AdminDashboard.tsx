@@ -149,6 +149,8 @@ export default function AdminDashboard() {
                 <option>Rice</option>
                 <option>Wheat</option>
                 <option>Cotton</option>
+                <option>Corn</option>
+                <option>Soybean</option>
               </select>
             </div>
 
@@ -160,7 +162,7 @@ export default function AdminDashboard() {
                   setAlertForm({ ...alertForm, severity: e.target.value })
                 }
               >
-                <option value="high">High (Red)</option>
+                <option value="high">High</option>
                 <option value="medium">Medium</option>
                 <option value="low">Low</option>
               </select>
@@ -178,6 +180,7 @@ export default function AdminDashboard() {
                 <option>Godavari Basin (Andhra Pradesh)</option>
                 <option>Dharwad Farms (Karnataka)</option>
                 <option>Palakkad Gap (Kerala)</option>
+                <option>Thanjavur Rice Belt (Tamil Nadu)</option>
               </select>
             </div>
           </div>

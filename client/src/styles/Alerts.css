@@ -175,4 +175,9 @@
     padding: 16px;
     border-radius: 20px;
   }
+  .alert-location {
+  font-size: 0.78rem;
+  color: #888;
+  margin-bottom: 4px;
+  }
 }

@@ -106,6 +106,7 @@ const AlertsPage: React.FC = () => {
                 </div>
               </div>
               
+              <p className="alert-location">📍 {alert.location}</p>
               <p className="alert-message"><strong>{alert.type}:</strong> {alert.message}</p>
               
               {alert.status.toLowerCase() === 'active' && (

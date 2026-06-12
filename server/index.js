@@ -343,6 +343,11 @@ app.post("/api/add-farmer", async (req, res) => {
       return res.status(400).json({ message: "All fields are required" });
     }
 
+    //checking if email is valid and only allows gmail
+    if (!/^[a-zA-Z0-9._%+-]+@gmail\.com$/.test(email)) {
+      return res.status(400).json({ message: "Only Gmail addresses are allowed (@gmail.com)" });
+    }
+
     // Check if farmer already exists
     const existingFarmer = await User.findOne({ email });
 

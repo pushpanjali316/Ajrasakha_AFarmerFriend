@@ -100,11 +100,11 @@ export default function MapPage() {
 
 /* ── SHARED TOKENS ── */
 const glassCard: React.CSSProperties = {
-  background: "rgba(255, 255, 255, 0.14)",
+  background: "rgba(20, 60, 30, 0.55)", // dark green instead of white
   backdropFilter: "blur(18px)",
   WebkitBackdropFilter: "blur(18px)",
-  border: "1px solid rgba(255, 255, 255, 0.22)",
-  boxShadow: "0 18px 40px rgba(0, 0, 0, 0.16)",
+  border: "1px solid rgba(255, 255, 255, 0.18)",
+  boxShadow: "0 18px 40px rgba(0, 0, 0, 0.25)",
   borderRadius: "24px",
 };
 

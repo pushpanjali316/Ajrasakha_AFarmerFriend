@@ -22,7 +22,7 @@ const Moderator = require('./models/Moderator'); // New Moderator model
 const bcrypt = require('bcrypt');
 
 
-const JWT_SECRET = "super_secret_hackathon_key_2026";
+const JWT_SECRET = process.env.JWT_SECRET
 
 const app = express();
 app.use(cors()); 
@@ -30,7 +30,7 @@ app.use(express.json());
 app.use('/api/alerts', alertsRoute);  
 
 
-mongoose.connect('mongodb://127.0.0.1:27017/Hackathon_db')
+mongoose.connect(process.env.MONGO_URI)
   .then(() => console.log('✅ MongoDB Connected'))
   .catch(err => console.error(err));
 

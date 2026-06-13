@@ -65,7 +65,7 @@ const fetchRawNDVI = async (regionName, daysBack) => {
 // fetchSatelliteData: current NDVI for dashboard cards
 const fetchSatelliteData = async (regionName) => {
   try {
-    const sorted = await fetchRawNDVI(regionName, 30); // uses cache now
+    const sorted = await fetchRawNDVI(regionName, 30); // oldest->newest
 
     const latestScan = sorted[sorted.length - 1];
     const previousScan = sorted[sorted.length - 2] || latestScan;
@@ -80,7 +80,7 @@ const fetchSatelliteData = async (regionName) => {
     if (realNdvi < 0.5) status = "Moderate";
     if (realNdvi < 0.3) status = "Critical";
 
-    console.log(`📡 SATELLITE SUCCESS (${regionName}): NDVI ${realNdvi}`);
+    console.log(`📡 SATELLITE SUCCESS (${regionName}): NDVI ${realNdvi} , Trend: ${trendDirection} (${percentChange}%)`);
 
     return {
       ndvi: realNdvi,
@@ -100,7 +100,7 @@ const fetchSatelliteData = async (regionName) => {
       healthScore: fallbackNdvi,
       status: fallbackNdvi < 0.5 ? "Moderate" : "Healthy",
       trend: "stable",
-      weeklyChange: "+1.2%"
+      weeklyChange: "0%"
     };
   }
 };

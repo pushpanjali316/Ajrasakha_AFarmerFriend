@@ -9,7 +9,7 @@ const mongoose = require('mongoose');
 const cors = require('cors');
 const Region = require('./models/Region');  
 const CropData = require('./models/CropData');
-const { fetchSatelliteData } = require('./satellite');
+const { fetchSatelliteData, fetchNDVIHistory } = require('./satellite');
 const Alert = require('./models/Alert');
 const Insight = require('./models/Insight');
 const { GoogleGenerativeAI } = require('@google/generative-ai');
@@ -34,7 +34,13 @@ mongoose.connect(process.env.MONGO_URI)
   .then(() => console.log('✅ MongoDB Connected'))
   .catch(err => console.error(err));
 
-
+const REGION_POLY_MAP = {
+  'Tamil Nadu': process.env.POLY_TN,
+  'Andhra Pradesh': process.env.POLY_AP,
+  'Karnataka': process.env.POLY_KA,
+  'Kerala': process.env.POLY_KL,
+  'Punjab': process.env.POLY_PB,
+};
 
 app.get('/api/regions', async (req, res) => {
   try {
@@ -251,39 +257,7 @@ app.post('/api/analyze', async (req, res) => {
     res.status(500).json({ error: "AI Engine Failed to respond." });
   }
 });
-// // --- THE REAL "DEEP ANALYSIS" AI ROUTE ---
-// app.post('/api/analyze', async (req, res) => {
-//   const { title, cause, prediction } = req.body;
-  
-//   try {
-//     // 1. Select the Gemini 1.5 Flash model (it is incredibly fast)
-//     const model = genAI.getGenerativeModel({ model: "gemini-2.5-flash" });
 
-//     // 2. The "System Prompt" - This is where you tell the AI how to behave
-//     const prompt = `
-//       You are an expert agricultural scientist and government policy advisor in India. 
-//       Analyze the following crop issue reported by a satellite monitoring system:
-      
-//       - Alert Title: ${title}
-//       - Detected Cause: ${cause}
-//       - Risk/Prediction: ${prediction}
-      
-//       Provide a highly professional, concise, 3-step actionable intervention plan to mitigate this issue. 
-//       Format your response as a simple list. Do not use markdown formatting like **bolding** or # headers. Keep it strictly under 5 sentences.
-//     `;
-
-//     // 3. Send the prompt to Gemini and wait for the response
-//     const result = await model.generateContent(prompt);
-//     const aiResponse = result.response.text();
-    
-//     // 4. Send the AI's brilliant plan back to your React frontend
-//     res.json({ analysis: aiResponse });
-
-//   } catch (err) {
-//     console.error("AI Generation Error:", err);
-//     res.status(500).json({ error: "AI Engine Failed to respond." });
-//   }
-// });
 
 app.put('/api/alerts/:id/status', async (req, res) => {
   try {
@@ -452,6 +426,29 @@ app.post('/api/moderator/login', async (req, res) => {
     res.status(500).json({ message: "Server error" });
   }
 });
+
+// This endpoint returns the last 4 weeks of NDVI data 
+// for a given region (or default region if not specified)
+
+app.get('/api/ndvi-history', async (req, res) => {
+  try {
+    const { region, view } = req.query;
+
+    if (!region || !view) {
+      return res.status(400).json({ error: 'region and view are required' });
+    }
+
+    const results = await fetchNDVIHistory(region, view);
+
+    if (!results) {
+      return res.status(503).json({ error: 'Satellite data unavailable.' });
+    }
+
+    res.json(results);
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
+});
 // GOOGLE AUTH REDIRECT
 
 app.get('/api/auth/google', (req, res) => {
@@ -459,6 +456,6 @@ app.get('/api/auth/google', (req, res) => {
   // You can integrate passport-google-oauth2 or Google OAuth SDK
   res.send("Redirect to Google OAuth page here");
 });
-app.listen(5000, () => {
+app.listen(process.env.PORT || 5000, () => {
   console.log('🚀 Server running on http://localhost:5000');
 });

@@ -131,3 +131,65 @@
   font-size: 1.1rem;
   z-index: 2;
 }
+
+/* ── Trend Comparison Card ── */
+.trend-card {
+  align-items: stretch;
+  text-align: left;
+}
+
+.trend-card h3 {
+  font-size: 1rem;
+  margin-bottom: 0;
+}
+
+.toggle-group button {
+  padding: 4px 12px;
+  border-radius: 12px;
+  border: none;
+  cursor: pointer;
+  font-size: 0.78rem;
+  font-weight: 600;
+  transition: all 0.2s ease;
+}
+
+.toggle-group button:hover {
+  opacity: 0.85;
+  transform: scale(1.04);
+}
+
+.chart-container {
+  margin: 16px 0 8px;
+  width: 100%;
+}
+
+/* Recharts tooltip */
+.recharts-tooltip-wrapper .recharts-default-tooltip {
+  background: rgba(30, 30, 30, 0.88) !important;
+  border: 1px solid rgba(255, 255, 255, 0.15) !important;
+  border-radius: 10px !important;
+  color: #fff !important;
+  font-size: 0.82rem;
+}
+
+/* Trend insight box */
+.card-info {
+  margin-top: auto;
+  width: 100%;
+  background: rgba(255, 255, 255, 0.10);
+  padding: 12px 14px;
+  border-radius: 14px;
+  font-size: 0.85rem;
+  border-left: 4px solid #2e7d32;
+  color: rgba(255, 255, 255, 0.88);
+  text-align: left;
+  line-height: 1.6;
+}
+
+.card-info p {
+  margin: 4px 0;
+}
+
+.card-info strong {
+  color: #fff;
+}

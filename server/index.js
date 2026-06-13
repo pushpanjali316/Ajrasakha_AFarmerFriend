@@ -57,7 +57,9 @@ app.get('/api/regions', async (req, res) => {
         coordinates: region.coordinates,
         latestNDVI:region.latestNDVI,
         cropType: region.cropType,
-        status: region.status
+        status: region.status,
+        trend: region.trend || "stable",
+        weeklyChange: region.weeklyChange || "0%",
       };
     }));
 
@@ -130,9 +132,10 @@ app.post('/api/run-pipeline', async (req, res) => {
     // update latest values in Region
     await Region.findByIdAndUpdate(region._id, {
       latestNDVI: newData.ndvi,
-      status: newData.status
+      status: newData.status,
+      trend: newData.trend,          
+      weeklyChange: newData.weeklyChange 
     });
-
   }
 
   res.json({
@@ -158,6 +161,8 @@ app.get('/api/regions/:id/health', async (req, res) => {
       regionName: region.name,
       latestNDVI: region.latestNDVI || 0, 
       status: region.status || "No Data",
+      trend: region.trend || "stable",           
+      weeklyChange: region.weeklyChange || "0%",
       // Convert DB history to simple array (will be empty array if no CropData exists yet)
       history: allData.map(d => ({
         date: d.timestamp, 

@@ -32,7 +32,7 @@ const Dashboard: React.FC = () => {
         const matchedRegion = regions.find((r: any) => 
           r.cropType.toLowerCase() === selectedCrop.toLowerCase()
         );
-        console.log(matchedRegion);
+        // console.log(matchedRegion);
         if (matchedRegion) {
           // 3. ZERO-LATENCY MAPPING: 
           // We already have the data! Just shape it for the SwipeableCards.
@@ -45,9 +45,9 @@ const Dashboard: React.FC = () => {
             status: matchedRegion.status || "Unknown",
             trend: matchedRegion.trend || "stable",
             // Generate a dynamic percentage string based on the trend
-            weeklyChange: matchedRegion.trend === "improving" ? "+5.2%" : (matchedRegion.trend === "declining" ? "-3.1%" : "0%")
+            weeklyChange: matchedRegion.weeklyChange || "0%",
           };
-          console.log(mappedData);
+          // console.log(mappedData);
           setData(mappedData);
         } else {
           console.warn(`No region found for ${selectedCrop}`);

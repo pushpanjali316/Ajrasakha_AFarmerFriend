@@ -16,7 +16,7 @@ const SwipeableCards = ({data, cropName}:any )=> {
       {/*console.log(data, cropName)*/}
       <div className="slider-track" style={{ transform: `translateX(-${activeIndex * 100}%)` }}>
         <div className="slide"><HealthSummaryCard data={data} /></div>
-        <div className="slide"><WaterStressCard data={data} /></div>
+        <div className="slide"><WaterStressCard cropName={cropName} /></div>
         <div className="slide"><TrendComparisonCard cropName={cropName} /></div>
       </div>
 

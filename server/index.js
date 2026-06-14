@@ -9,7 +9,7 @@ const mongoose = require('mongoose');
 const cors = require('cors');
 const Region = require('./models/Region');  
 const CropData = require('./models/CropData');
-const { fetchSatelliteData, fetchNDVIHistory } = require('./satellite');
+const { fetchSatelliteData, fetchNDVIHistory ,fetchWaterStressData} = require('./satellite');
 const Alert = require('./models/Alert');
 const Insight = require('./models/Insight');
 const { GoogleGenerativeAI } = require('@google/generative-ai');
@@ -454,6 +454,22 @@ app.get('/api/ndvi-history', async (req, res) => {
     res.status(500).json({ error: err.message });
   }
 });
+
+// for water stress data in swipeable cards->dashboard
+app.get('/api/water-stress', async (req, res) => {
+  try {
+    const { region } = req.query;
+    if (!region) return res.status(400).json({ error: 'region is required' });
+
+    const data = await fetchWaterStressData(region);
+    res.json(data);
+  } catch (err) {
+    console.error(err); //logs the actual error to your server console
+    res.status(500).json({ error: err.message });
+  }
+});
+
+
 // GOOGLE AUTH REDIRECT
 
 app.get('/api/auth/google', (req, res) => {

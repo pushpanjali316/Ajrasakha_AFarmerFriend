@@ -124,4 +124,73 @@ const fetchNDVIHistory = async (regionName, view) => {
   }
 };
 
-module.exports = { fetchSatelliteData, fetchNDVIHistory };
+const fetchWaterStressData = async (regionName) => {
+  try {
+    const cacheKey = `${regionName}-waterstress`;
+    if (satelliteCache.has(cacheKey)) {
+      const { data, timestamp } = satelliteCache.get(cacheKey);
+      if (Date.now() - timestamp < CACHE_TTL) {
+        console.log(`✅ Cache hit: ${cacheKey}`);
+        return data;
+      }
+    }
+
+    const POLYGON_ID = getPolygonId(regionName);
+    const API_KEY = process.env.AGRO_API_KEY;
+    const end = Math.floor(Date.now() / 1000);
+    const start = end - (60 * 24 * 60 * 60); // 60 days for better Landsat-8 coverage
+
+    // Step 1: Search for satellite images
+    const searchUrl = `http://api.agromonitoring.com/agro/1.0/image/search?start=${start}&end=${end}&polyid=${POLYGON_ID}&appid=${API_KEY}`;
+    const searchRes = await fetch(searchUrl);
+    const images = await searchRes.json();
+    //console.log("Step 1 response:", JSON.stringify(images).slice(0, 500));
+
+    if (!images || images.length === 0) throw new Error("No images found.");
+
+    console.log(`🛰️ Found ${images.length} images for ${regionName}`);
+
+    // Find latest image that has NDWI stats (Landsat-8 only)
+    const landsat = images.filter(img => img.type === 'Landsat 8' && img.stats?.ndwi);
+    const sentinel = images.filter(img => img.stats?.evi);
+
+    let ndwi = null, evi = null;
+
+    // Step 2a: Fetch NDWI from Landsat if available
+    if (landsat.length > 0) {
+      const latest = landsat[landsat.length - 1];
+        //console.log("Landsat stats object:", JSON.stringify(latest.stats));
+        //console.log("Sentinel stats object:", JSON.stringify(images[images.length-1].stats));
+      const ndwiRes = await fetch(latest.stats.ndwi);
+      const ndwiData = await ndwiRes.json();
+      ndwi = parseFloat(ndwiData.mean?.toFixed(2));
+      console.log(`💧 NDWI (${regionName}): ${ndwi}`);
+
+      if (latest.stats?.evi) {
+    const eviRes = await fetch(latest.stats.evi);
+    const eviData = await eviRes.json();
+    evi = eviData.mean != null ? parseFloat(eviData.mean.toFixed(2)) : null;
+    console.log(`🌱 EVI (${regionName}): ${evi}`);
+  }
+    }
+
+    const result = {
+      ndwi,
+      evi,
+      waterStatus: ndwi === null
+        ? "Unavailable"
+        : ndwi > 0.3 ? "Well Hydrated"
+        : ndwi > 0 ? "Mild Stress"
+        : "Severe Water Stress"
+    };
+
+    satelliteCache.set(cacheKey, { data: result, timestamp: Date.now() });
+    return result;
+
+  } catch (error) {
+    console.warn(`⚠️ Water stress failed for ${regionName}: ${error.message}`);
+    return { ndwi: null, evi: null, waterStatus: "Unavailable" };
+  }
+};
+
+module.exports = { fetchSatelliteData, fetchNDVIHistory, fetchWaterStressData };

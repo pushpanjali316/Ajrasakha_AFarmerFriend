@@ -1,5 +1,5 @@
 import React,{useEffect,useState} from "react";
-import "../styles/farmersPage.css";
+import "../styles/farmerspage.css";
 import { API_BASE } from "../services/api";
 
 interface Farmer{

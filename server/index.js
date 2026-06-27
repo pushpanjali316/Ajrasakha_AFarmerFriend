@@ -21,6 +21,9 @@ const User = require('./models/User');
 const Moderator = require('./models/Moderator'); // New Moderator model
 const bcrypt = require('bcrypt');
 
+const dns = require('dns');
+dns.setDefaultResultOrder('ipv4first');
+
 
 const JWT_SECRET = process.env.JWT_SECRET
 

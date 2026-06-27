@@ -101,9 +101,11 @@
 const mongoose = require('mongoose');
 const Region = require('./models/Region'); 
 const Alert = require('./models/Alert'); // Make sure you have this model!
+require('dotenv').config();
 
-// Replace with your actual local MongoDB connection string if different
-const MONGO_URI = "mongodb://localhost:27017/Hackathon_db";
+// Uses MONGO_URI from your .env instead of hardcoded localhost
+const MONGO_URI = process.env.MONGO_URI;
+
 
 const seedRegions = [
   {
